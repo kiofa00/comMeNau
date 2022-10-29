@@ -1,0 +1,63 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 12, 2022, 9:07:49 PM
+    Author     : luffy
+*/
+
+.body{
+    min-height: 78vh;
+    padding-top: 45px;
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%);
+    padding-bottom: 25px;
+}
+.submit{
+    float:right
+}
+.pr-4{
+    padding-right: 4rem !important;
+}
+.submit-btn{
+    border: none;
+    background: #242E52;
+    padding: 8px;
+    color: white;
+    margin-top: 15px;
+}
+.pt-35{
+    padding-top: 35px;
+}
+.form-control{
+    width: 58%;
+    display: inline-block;
+    margin-left: 30px;
+}
+.form{
+    background: white;
+    border-radius: .25rem;
+    padding-left: 50px;
+    height: auto;
+    margin-top: 2rem;
+}
+.label{
+    display: inline-block;
+    min-width: 121px;
+    padding-bottom: 38px;
+    font-size: 20px;
+}
+.option-list{
+    margin-left: 31px;
+    padding: 4px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    outline: none;
+} 
+.meal-title{
+    padding-bottom: 25px
+}
+.title{
+    font-weight: bold;
+    text-transform: uppercase;
+}

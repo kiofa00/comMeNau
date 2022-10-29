@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box
+}
+.body{
+    height: 78.4vh
+}
+body {
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%);
+}
+
+.box-content{
+    font-size: 18.5px;
+    padding: 10px;
+    background-color: white;
+    width: 85%;
+    margin-left: 59px;
+    margin-top: 30px;
+}
+.box-header{
+    font-weight: 700;
+    border-bottom: 2px solid #242E52;
+    text-transform: uppercase;
+    padding: 30px 20px;
+    margin: 0;
+    font-size: 31px;
+    color: #242E52;
+    text-align: center;
+}
+.box{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid;
+    width: 70%;
+    height: auto;
+    margin: 4rem 0;
+
+}
+.title{
+    padding-top: 60px;
+    text-align: center;
+}
+.main{
+    margin: 0 15%;
+}
+.form-control{
+    width: 66%;
+    display: inline-block;
+    margin-left: 30px;
+}
+.form{
+    background: white;
+    border-radius: 12px;
+    padding-left: 50px;
+    height: 21rem;
+    padding-top: 11px;
+    margin-top: 2rem;
+}
+.label{
+    display: inline-block;
+    min-width: 130px;
+    padding-bottom: 30px;
+    font-size: 20px;
+}
+.save-btn{
+    border: 0;
+    background-color: #242E52;
+    color: white;
+    padding: 8.5px 19px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 19px;
+}
+.btn-box{
+    text-align: right;
+    padding-right: 63px;
+    padding-top: 4px;
+}
+.card-detail-box{
+    display: flex;
+    background: white;
+    border-radius: 6px;
+}
+.card-detail-img{
+    object-fit: cover;
+    border-radius: 6px 0 0 6px;
+}
+.card-detail-content{
+    text-decoration: none;
+    color: #242E52;
+    font-weight: bold;
+    text-align: left
+}
+.food-name{
+    margin: 0;
+    background-color: #242E52;
+    padding: 10px;
+    color: white;
+    border-radius: 0 4px 0 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+.food-des{
+    font-size: 14px;
+    margin: 0;
+    padding: 6px;
+    color: black;
+}
+.card-detail-item{
+    margin-bottom: 30px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    padding: 0 !important;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.dashboard{
+    height: auto !important
+}
+.card-price{
+    font-weight: bold;
+    color: black;
+    text-align: center
+}
+.card-price-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.card-detail-info{
+    align-items: center;
+    font-size: 17px;
+    padding: 15px 8px 0px;
+    margin: 0 !important;
+    text-align: left
+}
+.card-chef{
+    font-weight: bold;
+    color: black
+}
+.card-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.btn-box{
+    border: 0;
+    background-color: #242E52;
+    color: white;
+    padding: 6.5px 15px;
+    font-size: 18px;
+    border-radius: .25rem;
+}
+.btn-box:hover{
+    color: white
+}
+.card-meal-name{
+    text-align: left
+}
+.card-address{
+    text-align: center
+}

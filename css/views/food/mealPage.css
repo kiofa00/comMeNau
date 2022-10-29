@@ -1,0 +1,223 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Sep 22, 2022, 1:02:24 PM
+    Author     : luffy
+*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box
+}
+.footer{
+    position: unset
+}
+.body{
+    height: auto;
+    padding-bottom: 25px;
+}
+.main{
+    margin-left: 15rem;
+    padding-bottom: 25px
+}
+.header{
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+    border-bottom: solid 1px;
+}
+.to-header-link{
+    position: fixed;
+    background: #242E52;
+    color: white;
+    bottom: 4rem;
+    right: 1rem;
+    z-index: 100;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 40px;
+    border-top: solid 2px #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .3rem;
+}
+.to-header-link:hover{
+    color:#fff
+}
+.time-show{
+    position: fixed;
+    background: #242E52;
+    color: white;
+    bottom: 7rem;
+    right: 1rem;
+    z-index: 100;
+    font-size: 22px;
+    width: 70px;
+    height: 50px;
+    border-radius: .3rem .3rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.time-show:hover{
+    cursor: default
+}
+.mt-16{
+    margin: 16px 0;
+}
+.food-title{
+    display: flex;
+    padding-top: 3rem;
+}
+.food-title-content{
+    display: flex;
+    margin-bottom: 3.5rem;
+}
+.food-title-bottom{
+    width: 20%;
+    height: 2px;
+    display: flex;
+    background-color: black;
+    border-color: black;
+    margin-left: 1.25rem;
+    margin-top: 20px;
+}
+.card{
+    margin-bottom: 50px;
+    border-radius: 20px;
+    border: none;
+    flex-direction: unset;
+    padding: 0 !important;
+    text-decoration: none;
+}
+.card-detail-box{
+    display: flex;
+    background: white;
+    border-radius: 6px;
+}
+.card-detail-img{
+    width: 200px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px 0 0 6px;
+}
+.card-detail-content{
+    border-left: solid 2px #242E52;
+    width: 100%;
+}
+.food-name{
+    margin: 0;
+    background-color: #242E52;
+    padding: 10px;
+    width: 100%;
+    color: white;
+    border-radius: 0 4px 0 0;
+    text-align: center;
+}
+.food-des{
+    font-size: 14px;
+    margin: 0;
+    padding: 6px;
+    color: black;
+}
+.card-detail-item{
+    margin-bottom: 40px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    padding: 0 !important;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.card-price{
+    font-weight: bold;
+    color: black
+}
+.card-price-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.card-detail-info{
+    align-items: center;
+    height: 70%;
+    font-size: 20px;
+}
+.card-chef{
+    font-weight: bold;
+    color: black
+}
+.card-chef-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.plus-link{
+    color: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    padding: 8px;
+}
+.plus-link:hover{
+    color: white
+}
+.plus-btn{
+    padding: 0 !important;
+    height: 25%;
+    width: 20%;
+    border-radius: 2rem;
+    border: none;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #242E52;
+}
+.trash-btn{
+    display: block;
+    margin-left: 19px;
+    margin-top: 62px;
+    padding: 0 !important;
+    height: 25%;
+    width: 33%;
+    border-radius: 2rem;
+    border: none;
+    background-color: inherit;
+    color: red;
+}
+.trash-btn:hover{
+    color: #242E52
+}
+.flex-end{
+    justify-content: flex-end
+}
+.d-flex-end:first-child{
+    justify-content: flex-end
+}
+.display-none{
+    display: none !important
+}
+
+.cart {
+    position: fixed;
+    background: #242E52;
+    color: white;
+    bottom: 109px;
+    right: 1rem;
+    z-index: 100;
+    font-size: 1.5rem;
+    width: 70px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.jump{
+    height: 50px
+}

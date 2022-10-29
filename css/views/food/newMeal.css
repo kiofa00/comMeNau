@@ -1,0 +1,142 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 13, 2022, 3:13:31 PM
+    Author     : luffy
+*/
+
+.body{
+    height: auto;
+    padding-bottom: 30px
+}
+body{
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%);
+}
+.pt-45{
+    padding-top: 45px
+}
+.title{
+    padding-top: 60px;
+    text-align: center;
+}
+.main{
+    margin: 0 15%;
+}
+.form-control{
+    width: 70%;
+    display: inline-block;
+    margin-left: 30px;
+}
+.form{
+    background: white;
+    border-radius: 12px;
+    padding-left: 89px;
+    height: auto;
+    padding-top: 11px;
+    margin-top: 2rem;
+    border: solid 1px;
+}
+.label{
+    display: inline-block;
+    min-width: 200px;
+    padding-bottom: 30px;
+    font-size: 20px;
+}
+.create-btn{
+    border: 0;
+    background-color: #242E52;
+    color: white;
+    padding: 8.5px 19px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.btn-box{
+    text-align: right;
+    padding-right: 55px;
+    padding-top: 4px;
+    padding-bottom: 30px
+}
+.create-btn:hover{
+    color: white
+}
+.create-btn:first-child{
+    padding: 9px 19px;
+    margin-right: 13px;
+    background-color: red
+}
+.option-list{
+    margin-left: 31px;
+    padding: 4px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    outline: none;
+}
+.card-detail-box{
+    display: flex;
+    border-radius: 6px;
+    background: white;
+    padding: 0;
+}
+.card-detail-list{
+    height: 275px;
+    overflow: scroll;
+    overflow-x: auto;
+    margin-left: 36px;
+    width: 682.11px;
+    margin-top: 6px;
+    margin-bottom: 20px;
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%) !important;
+}
+.card-detail-img{
+    width: 126px;
+    object-fit: cover;
+}
+.card-detail-item{
+    display: block;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    color: black;
+    text-decoration: none
+}
+.card-detail-item:hover{
+    color: black;
+    text-decoration: none
+}
+.card-detail-content{
+    border-left: solid 2px #242E52;
+    width: 100%;
+}
+.food-name{
+    margin: 0;
+    background-color: #242E52;
+    padding: 10px;
+    width: 100%;
+    color: white;
+    border-radius: 0 4px 0 0;
+    text-align: center;
+}
+.food-des{
+    font-size: 14px;
+    margin: 0;
+    padding: 6px;
+}
+input[type=checkbox]{
+    position: absolute;
+    right: 22px;
+    letter-spacing: 24px;
+    top: 18px;
+    transform: scale(2);
+}
+.mb-25{
+    margin-bottom: 25px
+}
+.mb-25:last-child{
+    margin-bottom: 1px
+}
+.message{
+    color: red;
+    margin-right: 25px;
+    font-size: 20px;
+}

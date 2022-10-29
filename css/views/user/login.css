@@ -1,0 +1,205 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 19, 2022, 12:46:46 PM
+    Author     : luffy
+*/
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+.login{
+    height: 100vh;
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%);
+    position: relative;
+}
+
+.login__box{
+    width: 1050px;
+    height: 590px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
+.left{
+    width: 41%;
+    height: 100%;
+    padding: 25px 25px;
+}
+
+.right{
+    width: 59%;
+    height: 100%;
+}
+
+.top__icon{
+    width: 20px;
+}
+
+.top__content{
+    color: #452a5a;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.top__link{
+    height: 20px;
+}
+.contact{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    height: 87%;
+    margin:15px auto;
+}
+
+.left__title{
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-size: 35px;
+}
+
+.left{
+    background: linear-gradient(-45deg, #dcd7e0, #fff);
+}
+
+.submit{
+    border: solid 2px;
+    padding: 15px 70px;
+    border-radius: 8px;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 9px 15px -11px #452a5a;
+    cursor: pointer;
+    width: 100%;
+    font-size: 17px;
+    text-decoration: none;
+    text-align: center;
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%);
+}
+.submit:hover{
+    color: black
+}
+
+.right{
+    background: linear-gradient(212.38deg, rgba(242, 57, 127, 0.4) 0%, rgba(175, 70, 189, 0.5) 80%), url(img/hello.jpg);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    position: relative;
+}
+
+.right__text{
+    margin-top: 17%;
+    position: absolute;
+    background-color: #5151518c;
+    padding: 33px;
+    width: 100%;
+    height: 63%;
+}
+.right__title{
+    text-align: center;
+    font-size: 50px;
+    font-weight: 500;
+    margin-top: 29px;
+}
+
+.right__des{
+    text-align: center;
+    font-size: 23px;
+    font-weight: 400;
+    margin-top: 5rem;
+    margin-left: -24px;
+}
+.right__img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ======INPUT  */
+.input__box{
+    position: relative;
+    width: 100%;
+    margin: 35px auto 0;
+}
+
+.input__box input{
+    position: relative;
+    width: 100%;
+    padding: 20px 10px 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    z-index: 10;
+}
+
+.input__content{
+    position: absolute;
+    left: 0;
+    padding: 20px 10px 10px;
+    font-size: 1em;
+    color: black;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+}
+
+.input__box input:valid ~ .input__content,
+.input__box input:focus ~ .input__content{
+    color: #452a5a;
+    transform: translateX(-10px) translateY(-34px);
+    font-size: 0.75em;
+}
+
+.small__content{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ddd6f3;
+    border-radius: 4px;
+    transition: 0.5s;
+    pointer-events: none;
+    z-index: 9;
+}
+
+.input__box input:valid ~ .small__content,
+.input__box input:focus ~ .small__content{
+    height: 44px;
+}
+
+.message{
+    color: red;
+    text-align: center;
+}
+.divider-under{
+    width: 100%;
+    margin: 35px auto;
+    border-bottom: solid 1px #bbb;
+}

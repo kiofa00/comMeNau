@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: "nunito"
+}
+.body{
+    height: 78.4vh
+}
+body {
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%);
+}
+.btn-header:hover{
+    text-decoration: none
+}
+.dashboard-link{
+    color: rgba(36, 46, 82, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 19px 14px;
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.dashboard{
+    background: #fff;
+    box-shadow: 0 20px 35px rgb(0 0 0 / 10%);
+}
+
+.dashboard-icon{
+    font-size: 20px;
+    height: 24px;
+}
+
+.dashboard-link:hover{
+    color: rgba(36, 46, 82, 1);
+    background: #eee;
+    text-decoration: none
+}
+
+.dashboard-logo {
+    margin: 10px 0 36px 10px;
+}
+
+.dashboard-pic {
+    width: 100%
+}
+
+.dashboard-name{
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.dashboard-list{
+    list-style: none;
+    padding: 0;
+    position: sticky;
+    top: 7rem;
+}
+.d-flex-center{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}

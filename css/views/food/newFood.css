@@ -1,0 +1,79 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 13, 2022, 3:13:31 PM
+    Author     : luffy
+*/
+
+.body{
+    height: 78.4vh
+}
+body{
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%);
+}
+.pt-45{
+    padding-top: 45px
+}
+.title{
+    padding-top: 60px;
+    text-align: center;
+}
+.main{
+    margin: 0 15%;
+}
+.form-control{
+    width: 70%;
+    display: inline-block;
+    margin-left: 30px;
+}
+.form{
+    background: white;
+    border-radius: 12px;
+    padding-left: 89px;
+    height: 24rem;
+    padding-top: 11px;
+    margin-top: 2rem;
+    border: solid 1px;
+}
+.label{
+    display: inline-block;
+    min-width: 200px;
+    padding-bottom: 30px;
+    font-size: 20px;
+}
+.create-btn{
+    border: 0;
+    background-color: #242E52;
+    color: white;
+    padding: 8.5px 19px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.create-btn:hover{
+    color: white
+}
+.create-btn:first-child{
+    padding: 9px 19px;
+    margin-right: 13px;
+    background-color: red
+}
+.option-list{
+    margin-left: 31px;
+    padding: 4px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    outline: none;
+}
+.message{
+    color: red;
+    margin-right: 25px;
+    font-size: 20px;
+}
+.btn-box{
+    text-align: right;
+    padding-right: 63px;
+    padding-top: 6px;
+}

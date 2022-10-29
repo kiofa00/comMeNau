@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.body{
+    height: 78.4vh
+}
+body {
+    background: linear-gradient(40deg, #ddd6f3 30%, #ffedbc 70%);
+}
+.box-header{
+    font-weight: 700;
+    border-bottom: 1px solid;
+    text-transform: uppercase;
+    padding: 30px 20px;
+    padding-left: 60px;
+    margin: 0;
+    font-size: 31px;
+    text-align: center;
+}
+
+.box-content{
+    padding-left: 15px;
+    padding-bottom: 11.5px;
+}
+.box{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid;
+    width: 70%;
+    height: 81%;
+}
+.title{
+    padding-top: 60px;
+    text-align: center;
+}
+.main{
+    margin: 0 15%;
+}
+.form-control{
+    width: 66%;
+    display: inline-block;
+    margin-left: 30px;
+}
+.form{
+    background: white;
+    border-radius: 12px;
+    padding-left: 50px;
+    height: 21rem;
+    padding-top: 11px;
+    margin-top: 2rem;
+}
+.label{
+    display: inline-block;
+    min-width: 130px;
+    padding-bottom: 30px;
+    font-size: 20px;
+}
+.save-btn{
+    border: 0;
+    background-color: #242E52;
+    color: white;
+    padding: 8.5px 19px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 19px;
+}
+.btn-box{
+    text-align: right;
+    padding-right: 63px;
+    padding-top: 4px;
+}
+.option-list{
+    margin-left: 30px;
+    padding: 2px 6px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    outline: none;
+} 

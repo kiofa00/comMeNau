@@ -1,0 +1,388 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Sep 22, 2022, 1:02:24 PM
+    Author     : luffy
+*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box
+}
+.footer{
+    position: unset
+}
+.body{
+    height: auto;
+    padding-bottom: 25px;
+}
+.main{
+    margin-left: 15rem;
+    padding-bottom: 25px
+}
+.header{
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+    border-bottom: solid 1px;
+}
+.to-header-link{
+    position: fixed;
+    background: #242E52;
+    color: white;
+    bottom: 4rem;
+    right: 1rem;
+    z-index: 100;
+    font-size: 1.5rem;
+    width: 70px;
+    height: 50px;
+    border-top: solid 2px #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 .3rem .3rem;
+}
+.to-header-link:hover{
+    color:#fff
+}
+.time-show{
+    position: fixed;
+    background: #242E52;
+    color: white;
+    bottom: 7rem;
+    right: 1rem;
+    z-index: 100;
+    font-size: 22px;
+    width: 70px;
+    height: 50px;
+    border-radius: .3rem .3rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.time-show:hover{
+    cursor: default
+}
+.mt-16{
+    margin: 16px 0;
+}
+.food-title{
+    display: flex;
+    padding-top: 3rem;
+}
+.food-title-content{
+    display: flex;
+    margin-bottom: 3.5rem;
+}
+.food-title-bottom{
+    width: 20%;
+    height: 2px;
+    display: flex;
+    background-color: black;
+    border-color: black;
+    margin-left: 1.25rem;
+    margin-top: 20px;
+}
+.card-detail-box{
+    display: flex;
+    background: white;
+    border-radius: 6px;
+}
+.card-detail-img{
+    width: 200px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px 0 0 6px;
+}
+.card-detail-content{
+    border-left: solid 2px #242E52;
+    width: 100%;
+}
+.food-name{
+    margin: 0;
+    background-color: #242E52;
+    padding: 10px;
+    width: 100%;
+    color: white;
+    border-radius: 0 4px 0 0;
+    text-align: center;
+}
+.food-des{
+    font-size: 14px;
+    margin: 0;
+    padding: 6px;
+    color: black;
+}
+.card-detail-item{
+    margin-bottom: 40px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    padding: 0 !important;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.card-price{
+    font-weight: bold;
+    color: black
+}
+.card-price-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.card-detail-info{
+    align-items: center;
+    height: 70%;
+    font-size: 20px;
+}
+.card-chef{
+    font-weight: bold;
+    color: black
+}
+.card-chef-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.plus-link{
+    color: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    padding: 8px;
+}
+.plus-link:hover{
+    color: white
+}
+.plus-btn{
+    padding: 0 !important;
+    height: 25%;
+    width: 21%;
+    border-radius: 2rem;
+    border: none;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #242E52;
+}
+.trash-btn{
+    display: block;
+    padding: 0 !important;
+    border: none;
+    background-color: inherit;
+    color: red;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    font-size: 22px;
+}
+.trash-btn:hover{
+    color: #242E52
+}
+.trash-link{
+    color: red;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+}
+.trash-link:hover{
+    color: #242E52
+}
+.flex-end{
+    justify-content: flex-end
+}
+.d-flex-end:first-child{
+    justify-content: flex-end
+}
+.display-none{
+    display: none !important
+}
+
+.cart {
+    position: fixed;
+    background: #242E52;
+    color: white;
+    bottom: 109px;
+    right: 1rem;
+    z-index: 100;
+    font-size: 1.5rem;
+    width: 70px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.jump{
+    height: 50px
+}
+.timeline{
+    padding-bottom: 2%;
+    margin-left: 15rem;
+}
+.timeline-item{
+    display: inline-block;
+    border: solid 1px black;
+    width: 6rem;
+    height: 3rem;
+}
+.timeline-item:first-child{
+    border-radius: .25rem 0 0 .25rem;
+}
+.timeline-item:last-child{
+    border-radius: 0 .25rem .25rem 0;
+}
+.timeline-btn{
+    border: 0;
+    width: 100%;
+    background: #fff;
+    height: 100%;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.timeline-item:first-child .timeline-btn{
+    border-radius: .25rem 0 0 .25rem;
+}
+
+.timeline-item:last-child .timeline-btn{
+    border-radius: 0 .25rem .25rem 0;
+}
+.timeline-btn:hover{
+    background-color: #242E52;
+    color:#fff;
+}
+
+.timeline-list{
+    list-style: none;
+    display: flex;
+    padding-left: 0
+}
+.table{
+    width: 77%;
+    text-align: center;
+    margin-top: 1rem
+}
+/* The Modal (background) */
+.modal, .modal1{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content, .modal-content1{
+    background-color: #fefefe;
+    margin: 14% auto 4%; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+.modal-header-title{
+    margin-left: 30rem;
+    font-weight: bold;
+}
+.modal-content1{
+    margin: 19% auto;
+    padding-left: 25px;
+}
+.view-btn{
+    border: none;
+    background-color: inherit;
+    color: #0d6efd;
+}
+.view-btn:hover{
+    color: #0a58ca
+}
+.card-title{
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0.75rem 0 !important;
+}
+.card{
+    margin-bottom: 50px;
+    border: none;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    flex-direction: unset;
+}
+.card:hover{
+    color:black
+}
+.card-top{
+    position: relative;
+}
+.card-img-big{
+    width: 100%;
+    object-fit: cover;
+    height: 68%;
+    border-radius: .25rem .25rem 0 0;
+}
+.card-body{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    bottom: 0;
+}
+.card-price{
+    font-weight: bold;
+}
+.card-price-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.card-chef{
+    font-weight: bold;
+}
+.card-chef-pre{
+    color: #7e7e7e;
+    font-weight: normal
+}
+.mt-50{
+    margin-top: 50px
+}
+.pt-35{
+    padding-top: 35px;
+}
+.form-control{
+    width: 58%;
+    display: inline-block;
+    margin-left: 30px;
+}
+.form{
+    background: white;
+    border-radius: 12px;
+    margin-top: 2rem;
+    text-align: center;
+}
+.label{
+    display: inline-block;
+    min-width: 121px;
+    padding-bottom: 38px;
+    font-size: 20px;
+}
+.submit-btn{
+    font-size: 18px;
+    text-align: right;
+    float: right;
+    margin-right: 7.7rem;
+    padding: 5px 16px;
+    background-color: #242E52;
+    color: white;
+    border-radius: .25rem;
+}
+.d-flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
