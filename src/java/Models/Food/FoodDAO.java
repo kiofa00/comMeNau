@@ -507,13 +507,13 @@ public class FoodDAO implements Serializable {
         String sql = "select *\n"
                 + "  from Food\n"
                 + "  where Food.[name] = ? and [status]=1 ";
-        ResultSet rs=null;
+        ResultSet rs = null;
         try {
             con = DBConnect.getConnection();
             stm = con.prepareStatement(sql);
             stm.setString(1, name);
-            rs=stm.executeQuery();
-            if ( rs.next()) {
+            rs = stm.executeQuery();
+            if (rs.next()) {
                 return true;
             }
         } finally {
@@ -523,6 +523,35 @@ public class FoodDAO implements Serializable {
             if (con != null) {
                 con.close();
             }
+        }
+        return false;
+    }
+
+    public static boolean isFoodnameExistWhenUpdate(int Fid, String name) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        String sql = "    select *\n"
+                + "  from [Food]\n"
+                + "  where [Food].name= ? and [Food].status=? and FId != ? ";
+        ResultSet rs= null;
+        try {
+            con = DBConnect.getConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, name);
+            stm.setInt(2, 1);
+            stm.setInt(3, Fid);
+            rs=stm.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
         }
         return false;
     }

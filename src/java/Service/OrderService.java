@@ -65,13 +65,13 @@ public class OrderService {
             request.setAttribute("orderId", OrderId);
             request.setAttribute("email", Email);
             if (order == null) {
-                request.setAttribute("message", "Không tìm Thấy Đơn hàng!!");
+                request.setAttribute("message", "Không tìm Thấy Đơn hàng");
             }
             request.getRequestDispatcher("/home/checkOrderPage.do").forward(request, response);
         } catch (NumberFormatException e) {
             try {
                 e.printStackTrace();
-                request.setAttribute("message", "Không tìm Thấy Đơn hàng!!");
+                request.setAttribute("message", "Không tìm Thấy Đơn hàng");
                 request.getRequestDispatcher("/home/checkOrderPage.do").forward(request, response);
                 
             } catch (ServletException | IOException ex) {

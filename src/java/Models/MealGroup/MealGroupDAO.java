@@ -746,4 +746,33 @@ public class MealGroupDAO implements Serializable {
         }
         return result;
     }
+    public static boolean isMealnameExistWhenUpdate(int MId, String name) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        String sql = "  select *\n"
+                + "  from MealGroup\n"
+                + "  where MealGroup.name= ? and MealGroup.status=? and MId != ? ";
+        ResultSet rs= null;
+        try {
+            con = DBConnect.getConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, name);
+            stm.setInt(2, 1);
+            stm.setInt(3, MId);
+            rs=stm.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+        return false;
+    }
+    
 }

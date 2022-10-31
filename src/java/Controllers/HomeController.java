@@ -126,7 +126,7 @@ public class HomeController extends HttpServlet {
             int buildingId = Integer.parseInt(request.getParameter("buildingId"));
             BuildingDTO building = BuildingDAO.getBuildingById(buildingId);
             request.setAttribute("building", building);
-            request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (Exception e) {
         }
     }
@@ -188,7 +188,7 @@ public class HomeController extends HttpServlet {
             if (dayInSess != null && timelineInSess != null) {
                 SessionDTO session1 = SessionDAO.getTimelineByDay(dayInSess);
                 if (session1.getTimelineSize() == 0) {
-                    request.setAttribute("message", "Hôm nay chưa có món, mong khách hàng chọn một ngày khác!!");
+                    request.setAttribute("message", "Hôm nay chưa có món mong khánh hàng chọn một ngày khác");
                 } else {
                     request.setAttribute("session", session1);
                     List<MealGroupDTO> mealList = MealGroupDAO.getMealGroupByTimelineAndDay(timelineInSess, dayInSess);
@@ -207,7 +207,7 @@ public class HomeController extends HttpServlet {
                     sess.setAttribute("timeline", session.getTimeline().get(0).getFrom() + "-" + session.getTimeline().get(0).getTo());
                     request.setAttribute("mealList", mealList);
                 } else {
-                    request.setAttribute("message", "Hôm nay chưa có món, mong khách hàng chọn một ngày khác!!");
+                    request.setAttribute("message", "Hôm nay chưa có món mong khánh hàng chọn một ngày khác");
                     sess.setAttribute("day", day);
                 }
             }
@@ -290,7 +290,7 @@ public class HomeController extends HttpServlet {
                             + "                                                </div>\n"
                             + "                                                <div class=\"card-body row\">\n"
                             + "                                                    <p class=\"card-price\">\n"
-                            + "                                                        <span class=\"card-price-pre\">Giá</span>\n"
+                            + "                                                        <span class=\"card-price-pre\">Từ</span>\n"
                             + "                                                            " + Math.round(m.getPrice()) + "VND \n"
                             + "                                                    </p>       \n"
                             + "                                                    <p class=\"card-chef\">\n"
@@ -306,7 +306,7 @@ public class HomeController extends HttpServlet {
                         + "                                    <span class=\"sort-bar-label\">Sắp Xếp Theo</span>\n"
                         + "                                </div>"
                         + "<div id=\"show1\" class=\"row\">"
-                        + "<h1 class=\"message\">Hôm nay chưa có món, mong khách hàng chọn một ngày khác!!</h1>"
+                        + "<h1>Hôm nay chưa có món mong khánh hàng chọn một ngày khác</h1>"
                         + "</div>");
 
             }
@@ -334,7 +334,7 @@ public class HomeController extends HttpServlet {
                         + "                                                </div>\n"
                         + "                                                <div class=\"card-body row\">\n"
                         + "                                                    <p class=\"card-price\">\n"
-                        + "                                                        <span class=\"card-price-pre\">Giá</span>\n"
+                        + "                                                        <span class=\"card-price-pre\">Từ</span>\n"
                         + "                                                            " + Math.round(m.getPrice()) + "VND \n"
                         + "                                                    </p>       \n"
                         + "                                                    <p class=\"card-chef\">\n"
@@ -370,7 +370,7 @@ public class HomeController extends HttpServlet {
                         + "                                                </div>\n"
                         + "                                                <div class=\"card-body row\">\n"
                         + "                                                    <p class=\"card-price\">\n"
-                        + "                                                        <span class=\"card-price-pre\">Giá</span>\n"
+                        + "                                                        <span class=\"card-price-pre\">Từ</span>\n"
                         + "                                                            " + Math.round(m.getPrice()) + "VND \n"
                         + "                                                    </p>       \n"
                         + "                                                    <p class=\"card-chef\">\n"
@@ -448,7 +448,7 @@ public class HomeController extends HttpServlet {
             String[] fromTo = timeline.split("-");
             if (Integer.parseInt(fromTo[1]) < hours && Integer.parseInt(dayinMonth) == date) {
                 System.out.println(Integer.parseInt(fromTo[1]));
-                request.setAttribute("message", "Đã quá thời gian của món, vui lòng chọn khung giờ khác!!");
+                request.setAttribute("message", "Đã quá thời gian của món vui lòng chọn khung giờ khác!");
                 try {
                     request.getRequestDispatcher("/food/mealDetail.do").forward(request, response);
                     return;
@@ -480,6 +480,7 @@ public class HomeController extends HttpServlet {
             day = topDay;
             timeline = topTimeline;
         }
+        System.out.println(day+" "+timeline);
         String email = request.getParameter("email");
         String dayinMonth = day.split("/")[0];
         String owner = request.getParameter("name");
@@ -507,17 +508,17 @@ public class HomeController extends HttpServlet {
                         + "                            <div class=\"card-detail-box row m-0\">\n"
                         + "                                <img src=\"${pageContext.request.contextPath}/images/" + meal.getImages().get(0) + "\" class=\"card-detail-img col l-4 p-0\">\n"
                         + "                                <div class=\"card-detail-content col l-8 p-0\">\n"
-                        + "                                    <h4 class=\"food-name\">" +"Mã Đơn Hàng: "+ lastOrder + "</h4>\n"
+                        + "                                   <h4 class=\"food-name\">Mã Đơn Hàng  " + lastOrder + "</h4>\n"
                         + "                                    <div class=\"row card-detail-info\">\n"
-                        + "                                        <p class=\"card-meal-name col l-6\">" + meal.getName() + "</p>\n"
+                        + "                                      <p class=\"card-meal-name col l-6\">Tên Mâm Cơm:  " + meal.getName() + "</p>\n"
                         + "                                        <p class=\"card-price col l-6\">\n"
                         + "                                            <span class=\"card-pre\">Giá: </span>\n"
-                        + "                                           " + Math.round(meal.getPrice()) + "VND"+"\n"
+                        + "                                           " + meal.getPrice() + "  \n"
                         + "                                        </p>       \n"
                         + "                                    </div>\n"
                         + "                                    <div class=\"row card-detail-info\">\n"
-                        + "                                        <p class=\"card-date col l-6\">\n"
-                        + "                                            "+"Thời Gian: " + timeline + " " + day + "\n"
+                        + "                             <p class=\"card-date col l-6\"> Khung thời gian:  \n"
+                        + "                                            " + timeline + " " + day + "\n"
                         + "                                        </p>\n"
                         + "                                        <p class=\"card-address col l-6\">\n"
                         + "                                            <span class=\"card-pre\">Địa Chỉ:</span> " + BuildingDAO.getBuildingById(address).getName() + "\n"
@@ -528,7 +529,7 @@ public class HomeController extends HttpServlet {
                         + "                        </div> \n"
                         + "                    </div>"
                         + ""
-                        + "<a class=\"logo-link\" href=\"http://localhost:8080/comMeNau/home/checkOrderPage.do\">Kiểm Tra Thông tin Đơn Hàng!!</a>";
+                        + "<a class=\"logo-link\" href=\"http://localhost:8080/comMeNau/home/checkOrderPage.do\">Kiểm Tra Thông tin Đơn Hàng</a>";
                 AccountDAO.sendEmmail(email, "ntthuc321@gmail.com", "igaajhaauawyrusd", message, title);
 
             }
@@ -546,7 +547,7 @@ public class HomeController extends HttpServlet {
     public static void a(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         if (!ServletFileUpload.isMultipartContent(request)) {
-            out.println("Không có gì để tải lên!!");
+            out.println("Nothing to upload");
             return;
         }
         FileItemFactory itemfactory = new DiskFileItemFactory();
@@ -557,21 +558,21 @@ public class HomeController extends HttpServlet {
                 String contentType = item.getContentType();
                 System.out.println(contentType);
                 if (!contentType.equals("image/jpeg")) {
-                    out.println("Chỉ hỗ trợ định dạng png!!");
+                    out.println("only png format image files supported");
                     continue;
                 }
-                File uploadDir = new File("C:\\Users\\luffy\\Downloads\\NetBeansProject\\SWP301\\COMMENAU\\test\\web\\images\\" + item.getName() + ".");
+                File uploadDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + item.getName() + ".");
 
                 //File file = File.createTempFile("img", ".jpeg", uploadDir);
                 item.write(uploadDir);
                 System.out.println(item.getName());
-                out.println("Lưu File Thành Công!!");
+                out.println("File Saved Successfully");
             }
         } catch (FileUploadException e) {
 
-            out.println("Tải lên thất bại!!");
+            out.println("upload fail");
         } catch (Exception ex) {
-            out.println("Không Thể Lưu!!");
+            out.println("can't save");
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

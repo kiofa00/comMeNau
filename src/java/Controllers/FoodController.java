@@ -188,8 +188,8 @@ public class FoodController extends HttpServlet {
             case "showOrderByStatus":
                 showOrderByStatus(request, response);
                 break;
-            case "updateCategoryPage":
-                updateCategoryPage(request, response);
+            case "editCategory":
+                editCategoryPage(request, response);
                 break;
 
         }
@@ -221,7 +221,7 @@ public class FoodController extends HttpServlet {
 
     }
 
-    public void updateCategoryPage(HttpServletRequest request, HttpServletResponse response) {
+    public void editCategoryPage(HttpServletRequest request, HttpServletResponse response) {
         try {
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             CategoryDTO category = CategoryDAO.getCategoryById(categoryId);
@@ -244,7 +244,7 @@ public class FoodController extends HttpServlet {
 
             orders.forEach(o -> {
                 try {
-                    out.println("<tr style=\"background: #fff;\">\n"
+                    out.println("<tr style=\"background: #e8e8e8;\">\n"
                             + "                                    <td>\n"
                             + "                                        " + o.getId() + "\n"
                             + "                                    </td>\n"
@@ -268,8 +268,8 @@ public class FoodController extends HttpServlet {
                             + "                                    </td>\n");
                     if (status == 1) {
                         out.println("                                    <td>\n"
-                                + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none func-btn\" onclick=\"acceptOrder(this)\">Accept</button> | \n"
-                                + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none func-btn\" onclick=\"denyOrder(this)\">Deny</button>\n"
+                                + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none\" onclick=\"acceptOrder(this)\">Accept</button> | \n"
+                                + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none\" onclick=\"denyOrder(this)\">Deny</button>\n"
                                 + "                                    </td>\n");
                     } else {
                         out.println("                                    <td>\n"
@@ -495,7 +495,7 @@ public class FoodController extends HttpServlet {
 
             String topTimeline = request.getParameter("topTimeline");
             String topDay = request.getParameter("topDay");
-            System.out.println(topTimeline + topDay);
+            System.out.println(topTimeline + " " + topDay);
             if (topTimeline == null && topDay == null || topDay.isEmpty() || topTimeline.isEmpty()) {
                 String timeline = (String) session.getAttribute("timeline");
                 String day = (String) session.getAttribute("day");
@@ -524,6 +524,7 @@ public class FoodController extends HttpServlet {
                 request.setAttribute("topTimeline", topTimeline);
                 request.setAttribute("topDay", topDay);
             }
+
             request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (ServletException | IOException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
@@ -608,27 +609,28 @@ public class FoodController extends HttpServlet {
                         nutrition = item.getString("UTF-8");
                     }
                 } else {
-                    System.out.println(name);
-                    System.out.println(FoodDAO.isFoodExist(name));
-                    if (!FoodDAO.isFoodExist(name)) {
-                        File uploadDir = new File("C:\\Users\\luffy\\Downloads\\NetBeansProject\\SWP301\\COMMENAU\\CMN\\web\\images\\" + item.getName() + ".");
 
+                    if (!FoodDAO.isFoodExist(name)) {
+                        File uploadDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + item.getName() + ".");
+                        System.out.println(item.getName());
                         if (FoodDAO.insertFood(name, nutrition, categoryId, item.getName())) {
-                            item.write(uploadDir);
+                            if (!item.getName().isBlank()) {
+                                item.write(uploadDir);
+                            }
                         }
-                        request.setAttribute("message", "Tạo Thành Công!!");
+                        request.setAttribute("message", "File Saved Successfully");
                     } else {
                         request.setAttribute("foodName", name);
                         request.setAttribute("foodCategory", categoryId);
                         request.setAttribute("foodNutrition", nutrition);
-                        request.setAttribute("message", "Tên Đã Tồn Tại!!");
+                        request.setAttribute("message", "Name Is exist!!");
                     }
                 }
             }
             request.getRequestDispatcher("/food/newFood.do").forward(request, response);
         } catch (FileUploadException e) {
             e.printStackTrace();
-            request.setAttribute("message", "File Bị Lỗi!!");
+            request.setAttribute("message", "Your file has problem!");
             request.setAttribute("foodName", name);
             request.setAttribute("foodNutrition", nutrition);
             request.setAttribute("foodCategory", categoryId);
@@ -639,7 +641,7 @@ public class FoodController extends HttpServlet {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            request.setAttribute("message", "File Bị Lỗi!!");
+            request.setAttribute("message", "Your file has problem!");
             request.setAttribute("foodName", name);
             request.setAttribute("foodNutrition", nutrition);
             request.setAttribute("foodCategory", categoryId);
@@ -666,7 +668,7 @@ public class FoodController extends HttpServlet {
             List<MealGroupDTO> mealList = MealGroupDAO.getAllMealGroup();
             request.setAttribute("lastSession", lastSession);
             request.setAttribute("mealList", mealList);
-            request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -681,10 +683,10 @@ public class FoodController extends HttpServlet {
             System.out.println(CategoryDAO.isNameCategoryExist(categoryName));
             if (!CategoryDAO.isNameCategoryExist(categoryName)) {
                 if (CategoryDAO.insertCategory(categoryName, categoryType)) {
-                    request.setAttribute("message", "Thêm thành công!!");
+                    request.setAttribute("message", "Cập nhật thành công");
                 }
             } else {
-                request.setAttribute("message", "Tên Đã tồn tại!!");
+                request.setAttribute("message", "Tên Đã tồn tại!");
                 request.setAttribute("categoryName", categoryName);
                 request.setAttribute("categoryType", categoryType);
             }
@@ -697,7 +699,7 @@ public class FoodController extends HttpServlet {
     public static void newCategory(HttpServletRequest request, HttpServletResponse response) {
         try {
             SessionDTO lastSession = SessionDAO.getLastSession();
-            request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -745,7 +747,7 @@ public class FoodController extends HttpServlet {
             List<ChefDTO> chefList = ChefDAO.getAllChef();
             request.setAttribute("foodList", foodList);
             request.setAttribute("chefList", chefList);
-            request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -766,7 +768,6 @@ public class FoodController extends HttpServlet {
 
                 if (item.isFormField()) {
                     String nameField = item.getFieldName();
-
                     if (nameField.equals("mealName")) {
                         name = item.getString("UTF-8");
                     } else if (nameField.equals("mealPrice")) {
@@ -781,14 +782,14 @@ public class FoodController extends HttpServlet {
                 } else {
                     System.out.println(MealGroupDAO.isMealExist(name));
                     if (!MealGroupDAO.isMealExist(name)) {
-                        File uploadDir = new File("C:\\Users\\luffy\\Downloads\\NetBeansProject\\SWP301\\COMMENAU\\CMN\\web\\images\\" + item.getName() + ".");
+                        File uploadDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + item.getName() + ".");
                         if (MealGroupDAO.insertMealGroup(price, chefId, name, Describe, 0, item.getName())) {
                             item.write(uploadDir);
                             int lastMealgroupID = MealGroupDAO.getLastIdMealgroup();
                             for (int id : foodId) {
                                 MealGroupDAO.insertFoodIntoMeal(id, lastMealgroupID);
                             }
-                            request.setAttribute("message", "Tạo thành công!!");
+                            request.setAttribute("message", "Tạo thành công");
                         }
                     } else {
                         System.out.println(foodId.size());
@@ -797,18 +798,21 @@ public class FoodController extends HttpServlet {
                         request.setAttribute("mealDescribe", Describe);
                         request.setAttribute("foodId", foodId);
                         request.setAttribute("chefId", chefId);
-                        request.setAttribute("message", "Tên đã tồn tại!!");
-
+                        request.setAttribute("message", "Tên đã tồn tại");
                     }
                 }
             }
             request.getRequestDispatcher("/food/newMeal.do").forward(request, response);
         } catch (FileUploadException e) {
-
-            out.println("Tải lên thất bại!!");
+            e.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
-            out.println("Không Thể Lưu");
+
+        }
+        try {
+            request.getRequestDispatcher("/food/newMeal.do").forward(request, response);
+        } catch (ServletException ex) {
+            Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -839,7 +843,7 @@ public class FoodController extends HttpServlet {
                                         MealGroupDAO.insertMealInSession(Integer.parseInt(mealId), lastSession);
                                     }
                                 }
-                                request.setAttribute("message", "Tạo Thành Công!!");
+                                request.setAttribute("message", "Tạo Thành Công");
 
                             } catch (SQLException ex) {
                                 Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
@@ -847,7 +851,7 @@ public class FoodController extends HttpServlet {
                                 Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         } else {
-                            request.setAttribute("message", "Thời gian bắt đầu không thể sau thời gian kết thúc!!");
+                            request.setAttribute("message", "Thời gian bắt đầu không thể sau thời gian kết thúc");
                             request.setAttribute("from", from);
                             request.setAttribute("to", to);
                             request.setAttribute("day", dayString);
@@ -865,14 +869,14 @@ public class FoodController extends HttpServlet {
                     request.setAttribute("to", to);
                     request.setAttribute("day", dayString);
                     request.setAttribute("mealId", meal);
-                    request.setAttribute("message", "Khung giờ này đã có!!");
+                    request.setAttribute("message", "Khung giờ này đã có");
                 }
             } else {
                 request.setAttribute("from", from);
                 request.setAttribute("to", to);
                 request.setAttribute("day", dayString);
                 request.setAttribute("mealId", meal);
-                request.setAttribute("message", "Vui lòng nhập ngày tháng!!");
+                request.setAttribute("message", "Vui lòng nhập ngày tháng");
             }
             request.getRequestDispatcher("/food/newSession.do").forward(request, response);
         } catch (SQLException ex) {
@@ -932,7 +936,7 @@ public class FoodController extends HttpServlet {
                     AtomicInteger autoCount = new AtomicInteger(0);
                     sessionList.forEach(s -> {
                         int count = autoCount.incrementAndGet();
-                        out.println("<tr style=\"background: #fff;\">\n"
+                        out.println("<tr style=\"background: #e8e8e8;\">\n"
                                 + "                                    <td>\n"
                                 + "                                        " + count + "\n"
                                 + "                                    </td>\n"
@@ -1013,9 +1017,7 @@ public class FoodController extends HttpServlet {
                 AtomicInteger autoCount = new AtomicInteger(0);
                 categoryList.forEach(c -> {
                     int count = autoCount.incrementAndGet();
-                    out.println(
-                            "<tr style=\"background: #fff;\">\n"
-                            + "<td>\n"
+                    out.println("<td>\n"
                             + "                                        " + count + "\n"
                             + "                                    </td>\n"
                             + "                                    <td>\n"
@@ -1033,6 +1035,7 @@ public class FoodController extends HttpServlet {
                             + "                                        </button>\n"
                             + "                                    </td>\n"
                             + "                                </tr>");
+
                 });
 
             }
@@ -1051,7 +1054,7 @@ public class FoodController extends HttpServlet {
             request.setAttribute("food", food);
             request.setAttribute("categoryIdOfFood", categoryIdOfFood);
             request.setAttribute("categoryList", categoryList);
-            request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1066,14 +1069,14 @@ public class FoodController extends HttpServlet {
 
             if (categoryId > 0 && !name.isBlank() && type > 0) {
                 CategoryDAO.updateCategory(categoryId, name, type);
-                request.setAttribute("message", "Cập Nhật thành công!!");
+                request.setAttribute("message", "Cập Nhập thành công");
             } else {
-                request.setAttribute("message", "Vui Lòng nhập đúng yêu cầu!!");
+                request.setAttribute("message", "Vui Lòng nhập đúng yêu cầu");
             }
             request.setAttribute("categoryId", categoryId);
             request.setAttribute("name", name);
             request.setAttribute("type", type);
-            request.getRequestDispatcher("/food/updateCategoryPage.do?categoryId=" + categoryId).forward(request, response);
+            request.getRequestDispatcher("/food/editCategory.do?categoryId=" + categoryId).forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1096,8 +1099,8 @@ public class FoodController extends HttpServlet {
                     if (item.isFormField()) {
                         String name = item.getFieldName();
                         String value = item.getString("UTF-8");
-                        System.out.println("name1: " + name);
-                        System.out.println("value: " + value);
+                        //String decodedToUTF8 = new String(value.getBytes("UTF-8"), "UTF-8");
+
                         if (name.equals("foodId")) {
                             foodId = Integer.parseInt(item.getString("UTF-8"));
                         }
@@ -1110,36 +1113,46 @@ public class FoodController extends HttpServlet {
                         }
                     } else {
                         System.out.println(item.getName());
-                        if (FoodDAO.updateFood(foodId, fName, nutrition, categoryId)) {
-                            FoodDTO food = FoodDAO.getFoodById(foodId);
-                            if (!item.getName().isEmpty()) {
-                                File removeDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + food.getImages().get(0));
-                                System.out.println(removeDir.renameTo(new File("C:\\Users\\PC\\Desktop\\test\\web\\removeImages\\" + food.getImages().get(0))));
-                                File uploadDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + item.getName());
-                                item.write(uploadDir);
-                                ImageDAO.updateFoodImage(foodId, food.getImages().get(0), item.getName());
+                        if (!FoodDAO.isFoodnameExistWhenUpdate(foodId,fName)) {
+                            if (FoodDAO.updateFood(foodId, fName, nutrition, categoryId)) {
+                                FoodDTO food = FoodDAO.getFoodById(foodId);
+                                if (!item.getName().isEmpty()) {
+                                    File removeDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + food.getImages().get(0));
+                                    System.out.println(removeDir.renameTo(new File("C:\\Users\\PC\\Desktop\\test\\web\\removeImages\\" + food.getImages().get(0))));
+                                    File uploadDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + item.getName());
+                                    item.write(uploadDir);
+                                    ImageDAO.updateFoodImage(foodId, food.getImages().get(0), item.getName());
+                                }
                             }
+                            System.out.println("File Saved Successfully");
+                            request.setAttribute("message", "Cập nhật thành công");
+                        } else {
+                            request.setAttribute("foodName", fName);
+                            request.setAttribute("foodCategory", categoryId);
+                            request.setAttribute("foodNutrition", nutrition);
+                            request.setAttribute("message", "Name Is exist!!");
                         }
                     }
                 }
-                response.sendRedirect("/comMeNau/food/foodPage.do");
+                request.getRequestDispatcher("/food/editFood.do?foodId="+foodId).forward(request, response);
             } catch (FileUploadException e) {
-                request.setAttribute("message", "File Bị Lỗi!!");
+                request.setAttribute("message", "Your file has problem!");
                 request.setAttribute("name", fName);
                 request.setAttribute("nutrition", nutrition);
                 request.setAttribute("categoryId", categoryId);
                 try {
-                    request.getRequestDispatcher("/food/editFood.do").forward(request, response);
+                    request.getRequestDispatcher("/food/editFood.do?foodId="+foodId).forward(request, response);
                 } catch (ServletException ex) {
                     Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } catch (Exception ex) {
-                request.setAttribute("message", "File Bị Lỗi!!");
+                ex.printStackTrace();
+                request.setAttribute("message", "Your file has 132 problem!");
                 request.setAttribute("name", fName);
                 request.setAttribute("nutrition", nutrition);
                 request.setAttribute("categoryId", categoryId);
                 try {
-                    request.getRequestDispatcher("/food/editFood.do").forward(request, response);
+                    request.getRequestDispatcher("/food/editFood.do?foodId="+foodId).forward(request, response);
                 } catch (ServletException e) {
                     Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1155,12 +1168,13 @@ public class FoodController extends HttpServlet {
             MealGroupDTO meal = MealGroupDAO.getMealGroupById(mealId);
             List<ChefDTO> chefList = ChefDAO.getAllChef();
             List<FoodDTO> foodList = FoodDAO.getAllFood();
+
             request.setAttribute("meal", meal);
             request.setAttribute("quantity", MealGroupDAO.getSoldNumber(mealId));
             request.setAttribute("chefList", chefList);
             request.setAttribute("foodList", foodList);
 
-            request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1189,7 +1203,7 @@ public class FoodController extends HttpServlet {
             request.setAttribute("mealList", mealList);
             request.setAttribute("mealInSession", mealInSession);
 
-            request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1259,7 +1273,7 @@ public class FoodController extends HttpServlet {
             request.setAttribute("buildingListChef", buildingListChef);
             request.setAttribute("quantityChef", quantityOrderOfChef);
 
-            request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1333,7 +1347,7 @@ public class FoodController extends HttpServlet {
             AtomicInteger autoCount = new AtomicInteger(0);
             sessionList.forEach(s -> {
                 int count = autoCount.incrementAndGet();
-                out.println("<tr style=\"background: #fff;\">\n"
+                out.println("<tr style=\"background: #e8e8e8;\">\n"
                         + "                                    <td>\n"
                         + "                                        " + count + "\n"
                         + "                                    </td>\n"
@@ -1405,54 +1419,59 @@ public class FoodController extends HttpServlet {
                             foodId.add(Integer.parseInt(item.getString("UTF-8")));
                         }
                     } else {
-                        System.out.println(item.getName());
-                        if (MealGroupDAO.updateMealGroup(mealId, name, price, chefId, Describe)) {
-                            System.out.println("helloo");
-                            MealGroupDTO meal = MealGroupDAO.getMealGroupById(mealId);
-                            if (!item.getName().isEmpty()) {
-                                File removeDir = new File("C:\\Users\\luffy\\Downloads\\NetBeansProject\\SWP301\\COMMENAU\\CMN\\web\\images\\" + meal.getImages().get(0));
-                                removeDir.renameTo(new File("C:\\Users\\luffy\\Downloads\\NetBeansProject\\SWP301\\COMMENAU\\CMN\\web\\removeImages\\" + meal.getImages().get(0)));
-                                File uploadDir = new File("C:\\Users\\luffy\\Downloads\\NetBeansProject\\SWP301\\COMMENAU\\CMN\\web\\images\\" + item.getName());
-                                item.write(uploadDir);
-                                ImageDAO.updateMealImage(mealId, meal.getImages().get(0), item.getName());
-                                if (MealGroupDAO.deleteMealItems(mealId)) {
-                                    for (int id : foodId) {
-                                        MealGroupDAO.insertFoodIntoMeal(id, mealId);
+                        if (!MealGroupDAO.isMealnameExistWhenUpdate(mealId, name)) {
+                            if (MealGroupDAO.updateMealGroup(mealId, name, price, chefId, Describe)) {
+                                MealGroupDTO meal = MealGroupDAO.getMealGroupById(mealId);
+                                if (!item.getName().isEmpty()) {
+                                    File removeDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + meal.getImages().get(0));
+                                    removeDir.renameTo(new File("C:\\Users\\PC\\Desktop\\test\\web\\removeImages\\" + meal.getImages().get(0)));
+                                    File uploadDir = new File("C:\\Users\\PC\\Desktop\\test\\web\\images\\" + item.getName());
+                                    item.write(uploadDir);
+                                    ImageDAO.updateMealImage(mealId, meal.getImages().get(0), item.getName());
+                                    if (MealGroupDAO.deleteMealItems(mealId)) {
+                                        for (int id : foodId) {
+                                            MealGroupDAO.insertFoodIntoMeal(id, mealId);
+                                        }
                                     }
-                                }
-                            } else {
-                                if (MealGroupDAO.deleteMealItems(mealId)) {
-                                    for (int id : foodId) {
-                                        MealGroupDAO.insertFoodIntoMeal(id, mealId);
+                                } else {
+                                    if (MealGroupDAO.deleteMealItems(mealId)) {
+                                        for (int id : foodId) {
+                                            MealGroupDAO.insertFoodIntoMeal(id, mealId);
+                                        }
                                     }
                                 }
                             }
+                            System.out.println("File Saved Successfully");
+                            request.setAttribute("message", "Cập nhật thành công");
+                        } else {
+                            request.setAttribute("message", "Tên đã tồn tại");
                         }
                     }
-
                 }
-                response.sendRedirect("/comMeNau/food/mealPage.do");
+                request.setAttribute("mealName", name);
+                System.out.println(name);
+                request.getRequestDispatcher("/food/editMeal.do?mealId=" + mealId).forward(request, response);
             } catch (FileUploadException e) {
                 e.printStackTrace();
-                request.setAttribute("message", "File Bị Lỗi!!");
+                request.setAttribute("message", "File của bạn có vấn đề");
                 request.setAttribute("mealName", name);
                 request.setAttribute("mealId", mealId);
                 request.setAttribute("mealDescribe", Describe);
                 request.setAttribute("chef", chefId);
                 try {
-                    request.getRequestDispatcher("/food/newFood.do").forward(request, response);
+                    request.getRequestDispatcher("/food/editMeal.do?mealId=" + mealId).forward(request, response);
                 } catch (ServletException ex) {
                     Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                request.setAttribute("message", "File Bị Lỗi!!");
+                request.setAttribute("message", "Your file has problem!");
                 request.setAttribute("mealName", name);
                 request.setAttribute("mealId", mealId);
                 request.setAttribute("mealDescribe", Describe);
                 request.setAttribute("chef", chefId);
                 try {
-                    request.getRequestDispatcher("/food/newFood.do").forward(request, response);
+                    request.getRequestDispatcher("/food/editMeal.do?mealId=" + mealId).forward(request, response);
                 } catch (ServletException e) {
                     Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1491,7 +1510,7 @@ public class FoodController extends HttpServlet {
                                 }
                             }
                         }
-                        request.setAttribute("message", "Lưu thành Công!!");
+                        request.setAttribute("message", "Lưu thành Công!");
 
                     } catch (SQLException ex) {
                         Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
@@ -1499,7 +1518,7 @@ public class FoodController extends HttpServlet {
                         Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
-                    request.setAttribute("message", "Thời gian bắt đầu không thể sau thời gian kết thúc!!");
+                    request.setAttribute("message", "Thời gian bắt đầu không thể sau thời gian kết thúc");
                     request.setAttribute("from", from);
                     request.setAttribute("to", to);
                     request.setAttribute("day", dayString);
@@ -1539,7 +1558,7 @@ public class FoodController extends HttpServlet {
 
             orderList.forEach(o -> {
                 try {
-                    out.println("<tr style=\"background: #fff;\">\n"
+                    out.println("<tr style=\"background: #e8e8e8;\">\n"
                             + "                                    <td>\n"
                             + "                                        " + o.getId() + "\n"
                             + "                                    </td>\n"
@@ -1562,8 +1581,8 @@ public class FoodController extends HttpServlet {
                             + "                                        " + PaymentDAO.getPaymentById(o.getPayId()).getType() + "\n"
                             + "                                    </td>\n"
                             + "                                    <td>\n"
-                            + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none func-btn\" onclick=\"acceptOrder(this)\">Accept</button> | \n"
-                            + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none func-btn\" onclick=\"denyOrder(this)\">Deny</button>\n"
+                            + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none\" onclick=\"acceptOrder(this)\">Accept</button> | \n"
+                            + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none\" onclick=\"denyOrder(this)\">Deny</button>\n"
                             + "                                    </td>"
                     );
 
@@ -1588,7 +1607,7 @@ public class FoodController extends HttpServlet {
             System.out.println(orderList.isEmpty());
             orderList.forEach(o -> {
                 try {
-                    out.println("<tr style=\"background: #fff;\">\n"
+                    out.println("<tr style=\"background: #e8e8e8;\">\n"
                             + "                                    <td>\n"
                             + "                                        " + o.getId() + "\n"
                             + "                                    </td>\n"
@@ -1611,8 +1630,8 @@ public class FoodController extends HttpServlet {
                             + "                                        " + PaymentDAO.getPaymentById(o.getPayId()).getType() + "\n"
                             + "                                    </td>\n"
                             + "                                    <td>\n"
-                            + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none func-btn\" onclick=\"acceptOrder(this)\">Accept</button> | \n"
-                            + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none func-btn\" onclick=\"denyOrder(this)\">Deny</button>\n"
+                            + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none\" onclick=\"acceptOrder(this)\">Accept</button> | \n"
+                            + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none\" onclick=\"denyOrder(this)\">Deny</button>\n"
                             + "                                    </td>"
                             + "                                </tr>\n"
                     );
@@ -1652,7 +1671,7 @@ public class FoodController extends HttpServlet {
                 out.println("<option value=\"" + d + "\">" + d + "</option>");
             });
             out.println("</select>\n"
-                    + "                        <input type=\"submit\" value=\"Tìm Kiếm\" class=\"search-btn\" onclick=\"searchOrderbySession()\" />"
+                    + "                        <input type=\"submit\" value=\"Tìm Kiếm\" onclick=\"searchOrderbySession()\" />"
                     + "</div> "
                     + "<table class=\"table table-striped table-hover\">\n"
                     + "                        <thead class=\"table-light\">\n"
@@ -1670,7 +1689,7 @@ public class FoodController extends HttpServlet {
                     + "                        <tbody id=\"showOrder\">");
             orderList.forEach(o -> {
                 try {
-                    out.println("<tr style=\"background: #fff;\">\n"
+                    out.println("<tr style=\"background: #e8e8e8;\">\n"
                             + "                                    <td>\n"
                             + "                                        " + o.getId() + "\n"
                             + "                                    </td>\n"
@@ -1694,8 +1713,8 @@ public class FoodController extends HttpServlet {
                             + "                                    </td>\n");
                     if (status == 1) {
                         out.println("                                    <td>\n"
-                                + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none func-btn\" onclick=\"acceptOrder(this)\">Accept</button> | \n"
-                                + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none func-btn\" onclick=\"denyOrder(this)\">Deny</button>\n"
+                                + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none\" onclick=\"acceptOrder(this)\">Accept</button> | \n"
+                                + "                                        <button value=\"" + o.getId() + "\" class=\"text-decoration-none\" onclick=\"denyOrder(this)\">Deny</button>\n"
                                 + "                                    </td>\n");
                     } else {
                         out.println("                                    <td>\n"

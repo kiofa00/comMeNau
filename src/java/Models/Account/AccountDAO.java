@@ -6,7 +6,6 @@
 package Models.Account;
 
 import java.io.Serializable;
-import java.net.PasswordAuthentication;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,6 @@ import java.util.Properties;
 import ultils.DBConnect;
 import javax.mail.internet.*;
 import javax.mail.*;
-import javax.websocket.Session;
 
 /**
  *
@@ -144,10 +142,10 @@ public class AccountDAO implements Serializable {
         pros.put("mail.smtp.auth", "true");
         pros.put("mail.smtp.starttls.enable", "true");
 
-        javax.mail.Session session = javax.mail.Session.getDefaultInstance(pros, new javax.mail.Authenticator() {
+        Session session = Session.getDefaultInstance(pros, new javax.mail.Authenticator() {
             @Override
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new javax.mail.PasswordAuthentication(user, pass);
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, pass);
             }
         });
         try {
