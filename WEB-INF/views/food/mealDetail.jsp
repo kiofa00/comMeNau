@@ -59,7 +59,7 @@
                                 <i class="fa-solid fa-circle-plus icon-plus"></i><span class="price-right">Mua Ngay</span>
                             </a>  
                         </div>
-                            <h1>${message}</h1>
+                            <h1 class="message-top">${message}</h1>
                     </div>
                 </div>
                 <div>
@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="card-body row">
                                         <p class="card-price">
-                                            <span class="card-price-pre">Từ</span>
+                                            <span class="card-price-pre">Giá</span>
                                             <fmt:formatNumber
                                                 value="${meal.price}"
                                                 pattern="#,### VND"/>

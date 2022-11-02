@@ -7,6 +7,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,7 +43,9 @@
                 <div class="col l-5">
                     <div class="form">
                         <h3 class="text-center">Thông Tin Đơn Hàng</h3>
-                        <p class="message">${message}</p>
+                        <c:if test="${empty meal}">
+                            <p class="message">${message}</p>
+                        </c:if>
                         <c:if test="${not empty meal}">
                             <p class="order-line">
                                 <span class="order-span-pre">Tên Khách Hàng: </span>
@@ -66,7 +69,9 @@
                             </p>
                             <p class="order-line">
                                 <span class="order-span-pre">Giá Tiền: </span>
-                                <span class="order-span-after">${order.price}</span>
+                                <span class="order-span-after"><fmt:formatNumber
+                value="${order.price}"
+                pattern="#,### "/>VND</span>
                             </p>
                             <p class="order-line">
                                 <span class="order-span-pre">Phương Thức: </span>

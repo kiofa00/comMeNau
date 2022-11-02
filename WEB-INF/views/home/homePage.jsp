@@ -115,10 +115,10 @@
                                                 </div>
                                                 <div class="card-body row">
                                                     <p class="card-price">
-                                                        <span class="card-price-pre">Từ</span>
+                                                        <span class="card-price-pre">Giá</span>
                                                         <fmt:formatNumber
                                                             value="${meal.price}"
-                                                            pattern="#,### VND"/>
+                                                            pattern="#,###"/> VND
                                                     </p>       
                                                     <p class="card-chef">
                                                         <span class="card-chef-pre">Đầu Bếp: </span>

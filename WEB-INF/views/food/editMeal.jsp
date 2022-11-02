@@ -80,9 +80,12 @@
                     <input class="form-control" type="file" name="mealPic" value="${mealPic}">
                     <br/>
                 </div>
-                <div class="btn-box">
+                <div class="btn-box d-flex justify-content-end align-items-center">
+                    <span class="message">${message}</span>
+                    <div>
                     <a class="create-btn" href="<c:url value="/food/mealPage.do"/>">Quay Về</a>
                     <input type="submit" value="Lưu" class="create-btn">
+                    </div>
                 </div>
             </form>
         </div>
