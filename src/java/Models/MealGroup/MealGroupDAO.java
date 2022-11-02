@@ -746,6 +746,7 @@ public class MealGroupDAO implements Serializable {
         }
         return result;
     }
+    
     public static boolean isMealnameExistWhenUpdate(int MId, String name) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -774,5 +775,4 @@ public class MealGroupDAO implements Serializable {
         }
         return false;
     }
-    
 }

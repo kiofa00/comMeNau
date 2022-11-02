@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author PC
  */
-@WebServlet(name = "adminController", urlPatterns = {"/admin"})
+@WebServlet(name = "AdminController", urlPatterns = {"/Admin"})
 public class AdminController extends HttpServlet {
 
     /**
@@ -49,9 +49,6 @@ public class AdminController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = (String) request.getAttribute("action");
         switch (action) {
-            case "foodPage":
-                showFoodPage(request, response);
-                break;
             case "updateChef":
                 updateChef(request, response);
                 break;
@@ -77,13 +74,6 @@ public class AdminController extends HttpServlet {
         }
     }
 
-    public void showFoodPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        CustomerDTO user = (CustomerDTO) session.getAttribute("user");
-
-        request.getRequestDispatcher("/WEB-INF/Layers/dasboard.jsp").forward(request, response);
-    }
-
     public void updateChef(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println(request.getParameter("chefId"));
         int chefId = Integer.parseInt(request.getParameter("chefId"));
@@ -94,10 +84,10 @@ public class AdminController extends HttpServlet {
         double salary = Double.parseDouble(request.getParameter("chefSalary"));
         try {
             if (ChefDAO.updateChef(chefId, chefName, chefPhone, address, email, salary)) {
-                request.setAttribute("message", "Updaload Succesfully");
+                request.setAttribute("message", "Cập Nhật Thành Công!!");
                 request.getRequestDispatcher("/user/editChef.do?chefId=" + chefId).forward(request, response);
             } else {
-                request.setAttribute("message", "Has problem !!");
+                request.setAttribute("message", "Cập Nhật Thất Bại!!");
                 request.getRequestDispatcher("/user/editChef.do?chefId=" + chefId).forward(request, response);
             }
 
@@ -115,10 +105,11 @@ public class AdminController extends HttpServlet {
         double salary = Double.parseDouble(request.getParameter("chefSalary"));
         try {
             if (ChefDAO.insertChef(chefName, chefPhone, email, salary, address)) {
-                request.setAttribute("message", "create Succesfully");
+                
+                request.setAttribute("message", "Thêm Thành Công!!");
                 request.getRequestDispatcher("/user/newChef.do").forward(request, response);
             } else {
-                request.setAttribute("message", "Has problem !!");
+                request.setAttribute("message", "Thêm Thất Bại!!");
                 request.getRequestDispatcher("/user/newChef.do").forward(request, response);
             }
 
@@ -133,9 +124,9 @@ public class AdminController extends HttpServlet {
         try {
             if (!BuildingDAO.buildingIsExist(Name)) {
                 BuildingDAO.insertBuilding(Name);
-                request.setAttribute("message", "Tạo Thành công");
+                request.setAttribute("message", "Tạo Thành công!!");
             } else {
-                request.setAttribute("message", "Tên đã tồn tại");
+                request.setAttribute("message", "Tên đã tồn tại!!");
                 request.setAttribute("buildingName", Name);
             }
             request.getRequestDispatcher("/home/newBuilding.do").forward(request, response);
@@ -152,6 +143,7 @@ public class AdminController extends HttpServlet {
             if (ChefDAO.deleteChef(chefId)) {
                 AtomicInteger autoCount = new AtomicInteger(0);
                 List<ChefDTO> chefList = ChefDAO.getAllChef();
+                System.out.println("hello");
                 chefList.forEach(c -> {
                     int count = autoCount.getAndIncrement();
                     try {
@@ -243,11 +235,11 @@ public class AdminController extends HttpServlet {
                 building.setName(BuildingDAO.getBuildingById(buildingId).getName());
                 request.setAttribute("name", buildingName);
                 request.setAttribute("building", building);
-                request.setAttribute("message", "Tên đã tồn tại");
+                request.setAttribute("message", "Tên đã tồn tại!!");
             } else {
                 request.setAttribute("name", buildingName);
                 request.setAttribute("building", building);
-                request.setAttribute("message", "Cập nhật thành công");
+                request.setAttribute("message", "Cập nhật thành công!!");
                 BuildingDAO.updateBuilding(buildingId, buildingName);
 
             }
@@ -274,7 +266,7 @@ public class AdminController extends HttpServlet {
                 CustomerDTO cus = new CustomerDTO(userId, name, phone, LocationId, email);
                 List<BuildingDTO> buildingList = BuildingDAO.getAllBuilding();
                 request.setAttribute("buildingList", buildingList);
-                request.setAttribute("message", "create Succesfully");
+                request.setAttribute("message", "Lưu thành công!!");
                 request.setAttribute("customer", cus);
                 request.setAttribute("action", "editCustomer");
                 request.setAttribute("controller", "user");
@@ -286,7 +278,7 @@ public class AdminController extends HttpServlet {
                 request.setAttribute("customer", cus);
                 request.setAttribute("action", "editCustomer");
                 request.setAttribute("controller", "user");
-                request.setAttribute("message", "Has Problem!!");
+                request.setAttribute("message", "Có lỗi xảy ra!!");
                 request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
             }
         } catch (IOException | SQLException ex) {

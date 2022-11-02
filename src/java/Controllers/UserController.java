@@ -57,7 +57,7 @@ public class UserController extends HttpServlet {
         String action = (String) request.getAttribute("action");
         switch (action) {
             case "login":
-                request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
                 break;
             case "checkLogin":
                 CheckLogin(request, response);
@@ -146,7 +146,7 @@ public class UserController extends HttpServlet {
     public void newChef(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         List<BuildingDTO> buildingList = BuildingDAO.getAllBuilding();
         request.setAttribute("buildingList", buildingList);
-        request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
     }
 
     public void editChef(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -157,7 +157,7 @@ public class UserController extends HttpServlet {
 //        request.setAttribute("location", building);
         request.setAttribute("buildingList", buildingList);
         request.setAttribute("chef", chef);
-        request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
     }
 
     public void showCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -188,7 +188,7 @@ public class UserController extends HttpServlet {
         List<BuildingDTO> buildingList = BuildingDAO.getAllBuilding();
         request.setAttribute("buildingList", buildingList);
         request.setAttribute("customer", customer);
-        request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Layers/adminShow.jsp").forward(request, response);
     }
 
     public void showHistory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -232,7 +232,7 @@ public class UserController extends HttpServlet {
     public void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int accountId = Integer.parseInt(request.getParameter("id"));
         AccountDAO.VerifyAccount(accountId);
-        request.setAttribute("information", "Verify Successfully!!");
+        request.setAttribute("information", "Xác Thực Thành Công!!");
         request.getRequestDispatcher("user/login.do").forward(request, response);
     }
 
@@ -245,7 +245,7 @@ public class UserController extends HttpServlet {
             try {
                 request.setAttribute("account", account);
                 request.setAttribute("password", password);
-                request.setAttribute("message", "Incorrect Account or Password!");
+                request.setAttribute("message", "Tài khoản hoặc Mật khẩu sai!!");
                 request.getRequestDispatcher("user/login.do").forward(request, response);
             } catch (ServletException | IOException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
@@ -256,7 +256,7 @@ public class UserController extends HttpServlet {
                 try {
                     request.setAttribute("account", account);
                     request.setAttribute("password", password);
-                    request.setAttribute("message", "Incorrect Account or Password!");
+                    request.setAttribute("message", "Tài khoản hoặc Mật khẩu sai!!");
                     request.getRequestDispatcher("user/login.do").forward(request, response);
                 } catch (ServletException | IOException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
@@ -265,7 +265,7 @@ public class UserController extends HttpServlet {
                 try {
                     request.setAttribute("account", account);
                     request.setAttribute("password", password);
-                    request.setAttribute("message", "Very Account in your Email first");
+                    request.setAttribute("message", "Vui lòng xác thực Tài khoản!!");
                     request.getRequestDispatcher("user/login.do").forward(request, response);
                 } catch (ServletException | IOException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
@@ -281,7 +281,7 @@ public class UserController extends HttpServlet {
                         CustomerDTO admin = new CustomerDTO(0, "Admin", "", 0, "");
                         session.setAttribute("user", admin);
                         session.setAttribute("role", "1");
-                        request.getRequestDispatcher("/food/foodPage.do").forward(request, response);
+                        request.getRequestDispatcher("/food/orderPage.do").forward(request, response);
                     }
                 } catch (ServletException | IOException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
@@ -304,7 +304,7 @@ public class UserController extends HttpServlet {
         try {
             List<BuildingDTO> buildingList = BuildingDAO.getAllBuilding();
             request.setAttribute("buildList", buildingList);
-            request.getRequestDispatcher("/WEB-INF/Layers/show.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/user/register.jsp").forward(request, response);
         } catch (ServletException | IOException | SQLException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -342,7 +342,7 @@ public class UserController extends HttpServlet {
 
         if (account.isBlank() || passWord.isBlank() || checkPass.isBlank()) {
             try {
-                request.setAttribute("message", "Incorrect Account or Password!");
+                request.setAttribute("message", "Tài khoản hoặc Mật khẩu sai!!");
                 request.setAttribute("account", account);
                 request.setAttribute("name", name);
                 request.setAttribute("email", email);
@@ -353,7 +353,7 @@ public class UserController extends HttpServlet {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (AccountDAO.CheckExistAccount(account)) {
-            request.setAttribute("message", "User is already existed !! ");
+            request.setAttribute("message", "Tài khoản đã tồn tại!!");
             request.setAttribute("account", account);
             request.setAttribute("name", name);
             request.setAttribute("email", email);
@@ -367,7 +367,7 @@ public class UserController extends HttpServlet {
         } else {
             if (!checkPass.equals(passWord)) {
                 try {
-                    request.setAttribute("message", "Check Password again!");
+                    request.setAttribute("message", "Nhập lại mật khẩu!!");
                     request.setAttribute("account", account);
                     request.setAttribute("password", passWord);
                     request.setAttribute("checkPassword", checkPass);
@@ -384,7 +384,7 @@ public class UserController extends HttpServlet {
                     System.out.println(name);
                     System.out.println(name.length());
                     if (name.length() < 6 || name.length() > 40) {
-                        request.setAttribute("message", "name must be in range[6-40]");
+                        request.setAttribute("message", "Tên phải từ 6-40 kí tự!!");
                         request.setAttribute("account", account);
                         request.setAttribute("password", passWord);
                         request.setAttribute("name", name);
@@ -396,9 +396,9 @@ public class UserController extends HttpServlet {
                     } else {
                         CustomerDAO.insertCustomer(name, phone, address, email, account, passWord);
                         String title = "Verify Account!!";
-                        String message = "<a href=\"http://localhost:8080/comMeNau/user/verify.do?id="+AccountDAO.getCurrentId()+"\">VeriFy Account</a>";
+                        String message = "<a href=\"http://localhost:8080/comMeNau/user/verify.do?id="+AccountDAO.getCurrentId()+"\">Nhấn Vào Đây Để Xác Thực Tài Khoản!!</a>";
                             AccountDAO.sendEmmail(email, "ntthuc321@gmail.com", "igaajhaauawyrusd", message, title);
-                        request.setAttribute("message", "Verify your Account before login");
+                        request.setAttribute("message", "Xác thực Tài khoản trước khi Đăng Nhập!!");
                         request.getRequestDispatcher("/user/register.do").forward(request, response);
                     }
                 } catch (SQLException | ServletException | IOException ex) {

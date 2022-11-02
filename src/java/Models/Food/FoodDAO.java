@@ -526,7 +526,7 @@ public class FoodDAO implements Serializable {
         }
         return false;
     }
-
+    
     public static boolean isFoodnameExistWhenUpdate(int Fid, String name) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
